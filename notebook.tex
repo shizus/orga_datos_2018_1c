@@ -1,0 +1,1408 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{INFORME\_TP1\_REENTREGA}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{section}{%
+\subsection{======================================================================}\label{section}}
+
+\hypertarget{organizaciuxf3n-de-datos}{%
+\section{75.06/95.58 Organización de
+Datos}\label{organizaciuxf3n-de-datos}}
+
+\hypertarget{primer-cuatrimestre-de-2018}{%
+\section{Primer Cuatrimestre de
+2018}\label{primer-cuatrimestre-de-2018}}
+
+\hypertarget{trabajo-pruxe1ctico-1-anuxe1lisis-exploratorio}{%
+\section{Trabajo Práctico 1: Análisis
+Exploratorio}\label{trabajo-pruxe1ctico-1-anuxe1lisis-exploratorio}}
+
+\hypertarget{integrantes}{%
+\subsection{Integrantes:}\label{integrantes}}
+
+Marcelo Iannuzzi
+
+Gabriel La Torre
+
+Andrés Silvestri
+
+\hypertarget{section-1}{%
+\subsection{======================================================================}\label{section-1}}
+
+\hypertarget{introducciuxf3n}{%
+\section{Introducción}\label{introducciuxf3n}}
+
+Este trabajo está enfocado en hacer un primer análisis de los datos
+ofrecidos por la empresa Navent, de manera que encontremos
+particularidades que puedan ser de interés para dicha entidad.
+
+Siendo este el caso, lo primero que vamos a hacer es interiorizarnos de
+uno de los pilares que tiene la ciencia de datos, el negocio.
+
+\hypertarget{de-quuxe9-se-encarga-navent}{%
+\section{¿De qué se encarga Navent?}\label{de-quuxe9-se-encarga-navent}}
+
+Navent es una empresa que tiene dos misiones muy bien marcadas que se
+traducen en dos negocios distintos: ``Ayudamos a que las personas logren
+dos de los anhelos más importantes de la vida. Encontrar un Empleo y un
+Hogar.''
+
+Es decir que un negocio son los recursos humanos y el otro negocio es el
+negocio de bienes raíces.
+
+Dicho esto, primero haremos un primer análisis de los datos recibidos
+para saber con qué información lidiamos y empezaremos a proponernos
+preguntas que puedan ser de utilidad para la empresa. Posteriormente
+intentaremos buscar respuesta a esas preguntas en base a los datos
+obtenidos y propondremos una visualización que ayude a su rápido
+ententimiento.
+
+    \hypertarget{section}{%
+\subsection{======================================================================}\label{section}}
+
+\hypertarget{organizaciuxf3n-del-informe}{%
+\section{Organización del Informe:}\label{organizaciuxf3n-del-informe}}
+
+A continuación enunciaremos en primer instancia como tendremos dividido
+el informe que llevaremos a cabo. Lo primero será el armado de los
+datos, luego haremos análisis sobre los postulantes, los avisos por
+separado y luego junto a la información provista de las visitas y los
+postulaciones un análisis que englobe todo esto. Con esta idea tratamo
+de abordar en primer instancia la información que tenemos por separado,
+ver que se puede obtener de cada parte y luego unificarla para poder
+trabajarla unificando criterios.
+
+\hypertarget{importaciuxf3n-y-estructura-de-los-datos}{%
+\subsection{1 - Importación y estructura de los
+datos:}\label{importaciuxf3n-y-estructura-de-los-datos}}
+
+\begin{verbatim}
+1.1 - Configuración básica y obtención de los datasets.
+1.2 - Procesamiento general de las información y armado básico.
+1.3 - Resumen y cuestiones a tener en cuenta sobre el informe.
+\end{verbatim}
+
+\hypertarget{anuxe1lisis-sobre-los-postulantes-registrados}{%
+\subsection{2 - Análisis sobre los postulantes
+registrados:}\label{anuxe1lisis-sobre-los-postulantes-registrados}}
+
+\begin{verbatim}
+2.1 - ¿Cuales son los rangos de edad que más comunes entre los usuarios registrados?
+2.2 - ¿Qué nivel de especialización tienen estos postulantes?
+2.3 - ¿Cual es la proporción entre los géneros de los usuarios registrados?
+2.4 - ¿Hay relevancia por parte de los usuarios que no han registrado su género?
+\end{verbatim}
+
+\hypertarget{anuxe1lisis-sobre-los-avisos-publicados}{%
+\subsection{3 - Análisis sobre los avisos
+publicados:}\label{anuxe1lisis-sobre-los-avisos-publicados}}
+
+\begin{verbatim}
+3.1 - ¿Qué proporción tenemos entre las zonas que afectan los avisos?
+3.2 - ¿Cuales son los tipo de trabajo más requeridos, full-time, part-time?
+3.3 - ¿Qué proporción tenemos entre los avisos que están online y los offline?
+3.4 - ¿Qué proporción tenemos avisos para Juniors y para Sr/Ssr?
+\end{verbatim}
+
+\hypertarget{anuxe1lisis-sobre-las-visitas}{%
+\subsection{4 - Análisis sobre las
+visitas:}\label{anuxe1lisis-sobre-las-visitas}}
+
+\begin{verbatim}
+4.1 - ¿Qué días de la semana se ven más avisos?
+4.2 - ¿Cuales son las areas con mayor cantidad de visitas?
+4.3 - ¿Cuales vendrían a ser las ingenierías con mayor cantidad de visitas?
+4.4 - ¿Qué porcentaje de los avisos evaluados/visitados está online?
+4.5 - ¿Cuales son las empresas que reciben mayor cantidad de visitas en sus avisos?
+4.6 - ¿Qué género es el que más utiliza los servicios de la empresa?
+\end{verbatim}
+
+\hypertarget{anuxe1lisis-sobre-las-postulaciones}{%
+\subsection{5 - Análisis sobre las
+postulaciones:}\label{anuxe1lisis-sobre-las-postulaciones}}
+
+\begin{verbatim}
+5.1 - ¿Qué días de la semana se postula más gente?
+5.2 - ¿Cuales son las areas con mayor cantidad de postulaciones?
+5.3 - ¿Cuales vendrían a ser las ingenierías con mayor cantidad de postulaciones?
+5.4 - ¿Qué porcentaje de los avisos donde se ha postulado la gente está online?
+4.5 - ¿Cuales son las empresas con mayor cantidad de postulaciones en sus avisos?
+5.6 - ¿Quienes se postulan más a los avisos? ¿Hombres o mujeres?
+\end{verbatim}
+
+\hypertarget{conclusiones-generales}{%
+\subsection{6 - Conclusiones generales:}\label{conclusiones-generales}}
+
+\begin{verbatim}
+6.1 - Conclusiones sobre lo que hemos obtenido del informe.
+6.2 - Repositorio GitHub.
+\end{verbatim}
+
+\hypertarget{section-1}{%
+\subsection{======================================================================}\label{section-1}}
+
+    \hypertarget{importaciuxf3n-y-estructura-de-los-datos}{%
+\section{1 - Importación y estructura de los
+datos:}\label{importaciuxf3n-y-estructura-de-los-datos}}
+
+\hypertarget{configuraciuxf3n-buxe1sica-y-obtenciuxf3n-de-los-datasets.}{%
+\subsection{1.1 - Configuración básica y obtención de los
+datasets.}\label{configuraciuxf3n-buxe1sica-y-obtenciuxf3n-de-los-datasets.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} IMPORTACIÓN GENERAL DE LIBRERIAS Y VISUALIZACIÓN DE DATOS (matplotlib y seaborn)}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k+kn}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{datetime} \PY{k+kn}{as} \PY{n+nn}{DT}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{default}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{whitegrid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+        \PY{c+c1}{\PYZsh{}plt.rcParams[\PYZsq{}figure.figsize\PYZsq{}] = (20, 10)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} OBTENEMOS TODA LA INFORMACIÓN DE LOS DIFERENTES CSV.}
+        \PY{n}{nivel\PYZus{}educativo} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fiuba\PYZus{}1\PYZus{}postulantes\PYZus{}educacion.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{nacimiento\PYZus{}genero} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fiuba\PYZus{}2\PYZus{}postulantes\PYZus{}genero\PYZus{}y\PYZus{}edad.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}avisos} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fiuba\PYZus{}3\PYZus{}vistas.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{postulaciones} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fiuba\PYZus{}4\PYZus{}postulaciones.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{avisos\PYZus{}online} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fiuba\PYZus{}5\PYZus{}avisos\PYZus{}online.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{avisos\PYZus{}detalle} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fiuba\PYZus{}6\PYZus{}avisos\PYZus{}detalle.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{section}{%
+\subsection{======================================================================}\label{section}}
+
+\hypertarget{procesamiento-general-de-las-informaciuxf3n-y-armado-buxe1sico.}{%
+\subsection{1.2 - Procesamiento general de las información y armado
+básico.}\label{procesamiento-general-de-las-informaciuxf3n-y-armado-buxe1sico.}}
+
+Para cada una de las diferentes fuentes de datos haremos diversos
+tratamientos, tanto para purificar los datos como para filtrar aquellos
+que más nos ineresan, se hará una breve explicación sobre lo que se
+trata de obtener en cada caso a modo de resumen, como así también se
+comentara cada linea de código para que se pueda interpretar qué es lo
+que se decidió hacer en cada caso.
+
+\hypertarget{postulantes}{%
+\subsubsection{1.2.1 - Postulantes:}\label{postulantes}}
+
+Lo primero que vamos a tratar es ver que hay registros repetidos (debido
+a que cada postulante tiene varios niveles educativos registrados), por
+otro lado haremos un cálculo de la edad que posee cada postulante y los
+filtraremos por aquellos que están en un rango de edad coherente (no al
+trabajo infantil y tampoco a las personas que sobrepasan los cien años).
+Sobre la edad decidimos agregar una columna que nos represente el rango
+al que pertenece la persona, siendo un criterio arbitrario y subjetivo
+pero que nos servirá para análisis posteriores. También hacemos una
+pequeña limpieza sobre los niveles de educación como así también un
+filtrado de duplicados cuando no nos interese el apartado educativo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} UNIFICACIÓN BÁSICA SOBRE LA INFORMACIÓN DE LOS POSTULANTES.}
+        \PY{n}{postulantes} \PY{o}{=} \PY{n}{nivel\PYZus{}educativo}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{nacimiento\PYZus{}genero}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{outer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} TRANSFORMAMOS A DATETIME LA FECHA DE NACIMIENTO DE LOS POSTULANTES.}
+        \PY{n}{postulantes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fechanacimiento}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{postulantes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fechanacimiento}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{errors} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coerce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} CALCULAMOS LA EDAD DE LOS POSTULANTES CON UN VALOR NUMÉRICO.}
+        \PY{n}{now} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Timestamp}\PY{p}{(}\PY{n}{DT}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{postulantes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{now} \PY{o}{\PYZhy{}} \PY{n}{postulantes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fechanacimiento}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}m8[Y]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} SOLO CONSIDERAMOS COMO VÁLIDOS AQUELLOS POSTULANTES DE ENTRE 17 Y 100 AÑOS.}
+        \PY{n}{postulantes} \PY{o}{=} \PY{n}{postulantes}\PY{p}{[}\PY{p}{(}\PY{n}{postulantes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{17}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{postulantes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} ARMAMOS UNA COLUMNA SOBRE EL RANGO DE EDAD QUE TIENEN LOS POSTULANTES.}
+        \PY{n}{postulantes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abc}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZlt{}} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{} 20}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZgt{}} \PY{l+m+mi}{65}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZgt{} 65}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulantes}\PY{o}{.}\PY{n}{rango\PYZus{}edad} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZgt{} 65}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} ARMAMOS LOS DIFERENTES RANGOS DE EDAD QUE SE PUEDEN IR DANDO ENTRE LOS POSTULANTES.}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{24}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{20 \PYZti{} 25}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{25}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{29}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{25 \PYZti{} 30}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{30}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{34}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{30 \PYZti{} 35}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{35}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{39}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{35 \PYZti{} 40}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{40}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{44}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{40 \PYZti{} 45}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{45}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{49}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{45 \PYZti{} 50}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{50}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{54}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{50 \PYZti{} 55}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{55}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{59}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{55 \PYZti{} 60}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{60}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{postulantes}\PY{o}{.}\PY{n}{edad} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{64}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{60 \PYZti{} 65}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} ANALIZAMOS LOS NIVELES EDUCATIVOS Y UNIFICAMOS CRITERIOS SOBRE ESTOS.}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulantes}\PY{o}{.}\PY{n}{nombre} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Terciario/Técnico}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Terciario}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulantes}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulantes}\PY{o}{.}\PY{n}{nombre} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Terciario/Tecnico}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Terciario}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} PARA LOS ANÁLISIS DONDE EL NIVEL EDUCATIVO NO ES RELEVANTE HACEMOS UNA LIMPIEZA DE DUPLICADOS.}
+        \PY{n}{postulantes\PYZus{}unicos} \PY{o}{=} \PY{n}{postulantes}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{idpostulante}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{keep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{first}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{avisos}{%
+\subsubsection{1.2.2 - Avisos:}\label{avisos}}
+
+Lo primero que vamos a tratar con respecto a estos datos es que hay unos
+pocos que son fuera de CABA y GBA (exactamente 2) esto nos lleva a
+eliminarlos porque pierde sentido su análisis. Por otro lado vemos que
+hay varias formas de referirce al Gran Buenos Aires, lo que nos lleva a
+unificarlo. Haremos un merge con los avisos online teniendo así toda la
+información pertinente en una única fuente de datos, así también
+podremos diferenciar cuando un aviso está online y cuando no.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} LIMPIAMOS AQUELLOS AVISOS QUE NO PERTENECEN NI A CABA NI A GBA.}
+        \PY{n}{avisos\PYZus{}detalle} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle}\PY{p}{[}\PY{p}{(}\PY{n}{avisos\PYZus{}detalle}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}zona}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Buenos Aires (fuera de GBA)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} UNIFICAMOS CRITERIOS A LA HORA DE NOMBRAR AL GRAN BUENOS AIRES.}
+        \PY{n}{avisos\PYZus{}detalle}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{avisos\PYZus{}detalle}\PY{o}{.}\PY{n}{nombre\PYZus{}zona} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GBA Oeste}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}zona}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gran Buenos Aires}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} AGREGAMOS UN DATO PARA DISTINGUIR LOS AVISOS ONLINE.}
+        \PY{n}{avisos\PYZus{}online}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{esta\PYZus{}online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{si}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} UNIFICAMOS LOS DETALLES DE LOS AVISOS CON LOS AVISOS ONLINE.}
+        \PY{n}{avisos\PYZus{}detalle\PYZus{}completo} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{avisos\PYZus{}online}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idaviso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idaviso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} PONEMOS EN \PYZsq{}NO\PYZsq{} TODOS AQUELLOS AVISOS QUE NO ESTAN ONLINE.}
+        \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{o}{.}\PY{n}{esta\PYZus{}online} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{si}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{esta\PYZus{}online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} LIMPIAMOS LOS ACENTOS PARA EL NIVEL LABORAL QUE NOS TRAEN PROBLEMAS A LA HORA DE GRAFICAR.}
+        \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{á}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{é}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{í}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ó}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ú}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{u}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{visitas}{%
+\subsubsection{1.2.3 - Visitas:}\label{visitas}}
+
+Sobre esta información lo primero que queremos hacer es transformar la
+fecha a un formato que podamos manejar con propiedad, en segunda
+instancia nos parece interesante obtener el día de la semana donde se
+produjo la visita. Luego debemos de ordenar los días para que a futuro
+sea más lógica la graficación.
+
+Luego le incorporamos la información de los detalles de cada aviso, como
+así también hacemos un filtro sobre las ingenierías que más relevancia
+muestran en los avisos, como así también una limpieza sobre los acentos
+tanto para la denominación de la empresa como para el area sobre la que
+hace referencia el aviso. Unificamos también los datos referidos a
+ADECCO, el cual se divercifica en zonas pero para nuestro análisis
+termina siendo lo mismo.
+
+Por último y no menos importante es necesario empezar a obtener la
+información de quién es la persona que ha decidido visitar la
+publicación, con lo que terminamos unificando la información con los
+datos de los postulantes previamente adquiridos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} PLANTEMOAS LA FECHA EN QUE SE VISITAS EL AVISO COMO UNA NUEVA COLUMNA DATETIME.}
+        \PY{n}{vistas\PYZus{}avisos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fecha\PYZus{}vista}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{vistas\PYZus{}avisos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{errors} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coerce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} HACEMOS UNA DIFERENCIA ENTRE EL DÍA DE LA SEMANA EN EL QUE SE LLEVÓ A CABO LA VISITA.}
+        \PY{n}{vistas\PYZus{}avisos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fecha\PYZus{}vista}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{weekday\PYZus{}name}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} CREAMOS UN ORDENAMIENTO PARA LOS DÍAS DE LA SEMANA, COSA DE QUE NO QUEDE ORDENADA POR VALORES ASCENDENTES.}
+        \PY{n}{vistas\PYZus{}avisos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Categorical}\PY{p}{(}\PY{n}{vistas\PYZus{}avisos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{categories}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Monday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tuesday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wednesday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thursday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Friday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Saturday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sunday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ordered}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}dias} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}dias} \PY{o}{=} \PY{n}{vistas\PYZus{}dias}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} LE AGREGAMOS EL DETALLE DE LOS AVISOS A LAS VISITAS QUE ESTAMOS TRABAJANDO.}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idAviso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idaviso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} HACEMOS UNA LIMPIEZA SOBRE ALGUNOS NOMBRE EN LAS VISITAS.}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{nombre\PYZus{}area} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería  Eléctrica y Electrónica}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería Eléctrica y Electrónica}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{nombre\PYZus{}area} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería  Mecánica}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería Mecánica}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{nombre\PYZus{}area} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería  Industrial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería Industrial}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{nombre\PYZus{}area} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería  Automotriz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería Automotriz}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{nombre\PYZus{}area} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería  Metalurgica}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería Metalurgica}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} LIMPIAMOS LOS ACENTOS PARA EL NOMBRE\PYZus{}AREA QUE NOS TRAEN PROBLEMAS A LA HORA DE GRAFICAR.}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{á}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{é}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{í}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ó}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ú}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{u}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} LIMPIAMOS LOS ACENTOS PARA LA DENOMINACION\PYZus{}EMPRESA QUE NOS TRAEN PROBLEMAS A LA HORA DE GRAFICAR.}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{á}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{é}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{í}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ó}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ú}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{u}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} HACEMOS UN FILTRADO SOBRE LAS AREAS QUE SE RELACIONAN CON INGENIERÍA.}
+        \PY{n}{filtrado\PYZus{}ingenieria} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ingen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{na}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}
+        \PY{n}{filtrado\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{filtrado\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ingenieria}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{filtrado\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{filtrado\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ingenierias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} COMO LOS NOMBRES SUELEN SER MUY LARGOS LOS LIMPIAMOS PARA QUE SEA MÁS LEGIBLE EL GRÁFICO.}
+        \PY{n}{filtrado\PYZus{}ingenieria} \PY{o}{=} \PY{n}{filtrado\PYZus{}ingenieria}\PY{p}{[}\PY{n}{filtrado\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I. }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{na}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} NOS QUEDAMOS CON LAS DIEZ MÁS RELEVANTES.}
+        \PY{n}{diez\PYZus{}ingenierias} \PY{o}{=} \PY{n}{filtrado\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} PARA COMPARAR TAMBIÉN BUSCAMOS AQUELLLAS AREAS EN GENERAL QUE TIENEN MÁS VISITAS.}
+        \PY{n}{top\PYZus{}visitados\PYZus{}area}\PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} VIENDO LOS DATOS VEMOS QUE ADECCO TIENE MUCHOS DATOS PERO SEPARADOS SEGÚN ZONAS, LOS UNIFICAMOS PARA MAYOR CLARIDAD.}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{denominacion\PYZus{}empresa}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Adecco}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adecco}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} VEMOS LAS EMPRESAS QUE TIENEN UNA MAYOR CANTIDAD DE VISITAS.}
+        \PY{n}{diez\PYZus{}vistas\PYZus{}empresas} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} PARAMETRIZAMOS LAS FECHAS TANTO EL DÍA COMO EL MES PARA ESTE FUENTE DE DATOS COMPLETA.}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fecha\PYZus{}vista\PYZus{}completa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{errors} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coerce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana\PYZus{}completa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fecha\PYZus{}vista\PYZus{}completa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{weekday\PYZus{}name}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mes\PYZus{}completa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fecha\PYZus{}vista\PYZus{}completa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{month}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}completa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fecha\PYZus{}vista\PYZus{}completa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{day}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} OBTENEMOS LA INFORMACION DE QUIEN HA HECHO LA VISITA.}
+        \PY{n}{vistas\PYZus{}avisos\PYZus{}completas} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{postulantes\PYZus{}unicos}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{postulaciones}{%
+\subsubsection{1.2.4 - Postulaciones:}\label{postulaciones}}
+
+Con estos datos vamos a ver las postulaciones a los avisos propiamente
+dichos, lo primero sería hacer algo similar a lo que se hizo con las
+visitas, transformar la fecha a un formato apropiado para poder
+trabajarla, nuevamente como segunda medida obtenemos el día de la semana
+al que corresponde cada postulación. Luego debemos de ordenar los días
+de la semana para que sea más lógica la graficación, también nificamos
+con los detalles que tienen los avisos cosa de poder contrastar mayor
+información, como así también aplicamos una limpieza sobre los acentos
+tanto para el area como para la denominación de la empresa.
+
+Obtenemos también las diez areas con más postulaciones y las diez
+ingenierías con más postulaciones. Unificamos los datos referidos a
+ADECCO, el cual se divercifica en zonas pero para nuestro análisis
+termina siendo lo mismo. Luego esto nos lleva a tomar un listado de las
+diez empresas con mayor cantidad de postulaciones.
+
+Por último y no menos importante es necesario empezar a obtener la
+información de quién es la persona que se ha decidido postular, con lo
+que terminamos unificando la información con los datos de los
+postulantes previamente adquiridos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} REDUCIMOS EL STRING QUE CORRESPONDE A LA FECHA SOLO HACIENDO REFERENCIA AL DÍA/MES/AÑO.}
+        \PY{n}{postulaciones}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fecha\PYZus{}postulado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fechapostulacion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{slice}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} LO TRANSFORMAMOS EN UN DATETIME COSA DE PODER TRABAJARLO MEJOR.}
+        \PY{n}{postulaciones}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fecha\PYZus{}postulado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{postulaciones}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fecha\PYZus{}postulado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{errors} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coerce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} OBTENEMOS EL DÍA DE LA SEMANA QUE CORRESPONDE A ESA POSTULACIÓN EN CUESTIÓN.}
+        \PY{n}{postulaciones}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fecha\PYZus{}postulado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{weekday\PYZus{}name}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} CREAMOS UN ORDENAMIENTO PARA LOS DÍAS DE LA SEMANA, COSA DE QUE NO QUEDE ORDENADA POR VALORES ASCENDENTES.}
+        \PY{n}{postulaciones}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Categorical}\PY{p}{(}\PY{n}{postulaciones}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{categories}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Monday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tuesday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wednesday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thursday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Friday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Saturday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sunday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ordered}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+        \PY{n}{postulaciones\PYZus{}dias} \PY{o}{=} \PY{n}{postulaciones}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+        \PY{n}{postulaciones\PYZus{}dias} \PY{o}{=} \PY{n}{postulaciones\PYZus{}dias}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} LE AGREGAMOS EL DETALLE DE LOS AVISOS A LAS POSTULACIONES QUE ESTAMOS TRABAJANDO.}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos} \PY{o}{=} \PY{n}{postulaciones}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idaviso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idaviso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} LIMPIAMOS LOS ACENTOS SOBRE EL NOMBRE\PYZus{}AREA QUE NOS TRAEN PROBLEMAS A LA HORA DE GRAFICAR.}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{á}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{é}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{í}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ó}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ú}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{u}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} LIMPIAMOS LOS ACENTOS SOBRE LA DENOMINACIÓN\PYZus{}EMPRESA QUE NOS TRAEN PROBLEMAS A LA HORA DE GRAFICAR.}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{á}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{é}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{í}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ó}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ú}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{u}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} OBTENEMOS LAS DIEZ AREAS CON MÁS POSTULACIONES.}
+        \PY{n}{top\PYZus{}postulaciones\PYZus{}area}\PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} LIMPIAMOS LOS NOMBRES DE LAS INGENIERÍAS QUE INTERVIENEN EN LA CUESTIÓN.}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{nombre\PYZus{}area} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería  Eléctrica y Electrónica}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería Eléctrica y Electrónica}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{nombre\PYZus{}area} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería  Mecánica}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería Mecánica}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{nombre\PYZus{}area} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería  Industrial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería Industrial}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{nombre\PYZus{}area} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería  Automotriz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería Automotriz}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{nombre\PYZus{}area} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería  Metalurgica}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingeniería Metalurgica}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} HACEMOS UN FILTRADO SOBRE EL NOMBRE DE AREA SEGÚN CORRESPONDA A INGENIERÍA.}
+        \PY{n}{filtrado\PYZus{}postu\PYZus{}ingenieria} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ingen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{na}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}
+        \PY{n}{filtrado\PYZus{}postu\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{filtrado\PYZus{}postu\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ingenieria}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{filtrado\PYZus{}postu\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{filtrado\PYZus{}postu\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ingenierias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{filtrado\PYZus{}postu\PYZus{}ingenieria} \PY{o}{=} \PY{n}{filtrado\PYZus{}postu\PYZus{}ingenieria}\PY{p}{[}\PY{n}{filtrado\PYZus{}postu\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I. }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{na}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} TOMAMOS SOLO LAS DIEZ INGENIERÍAS QUE MAS RELEVANCIA MUESTREN.}
+        \PY{n}{diez\PYZus{}ingenierias\PYZus{}postu} \PY{o}{=} \PY{n}{filtrado\PYZus{}postu\PYZus{}ingenieria}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} VIENDO LOS DATOS VEMOS QUE ADECCO TIENE MUCHOS DATOS PERO SEPARADOS SEGÚN ZONAS, LOS UNIFICAMOS PARA MAYOR CLARIDAD.}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{denominacion\PYZus{}empresa}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Adecco}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adecco}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} TOMAMOS LAS DIEZ EMPRESAS CON MAYOR CANTIDAD DE POSTULACIONES.}
+        \PY{n}{diez\PYZus{}postulaciones\PYZus{}empresas} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{denominacion\PYZus{}empresa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} OBTENEMOS LA INFORMACIÓN DE QUIEN HA HECHO LA POSTULACIÓN.}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{postulantes\PYZus{}unicos}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{section}{%
+\subsection{======================================================================}\label{section}}
+
+\hypertarget{resumen-y-cuestiones-a-tener-en-cuenta-sobre-el-informe.}{%
+\subsection{1.3 - Resumen y cuestiones a tener en cuenta sobre el
+informe.}\label{resumen-y-cuestiones-a-tener-en-cuenta-sobre-el-informe.}}
+
+En primer instancia contamos con la siguiente información para poder
+trabajar, por un lado tenemos los postulantes que son las personas que
+se registran, sobre las cuales tenemos tanto su nivel educativo, su
+fecha de nacimiento como así también su género, sobre estos datos los
+hemos limpiado y armado rangos de edades como así también hemos
+mantenido los duplicados en los niveles educativos puesto que para
+algunos informes nos pueden ser de utilidad, para aquellos informes que
+por el contrario nos resulte redundante o genere algún tipo de ruido
+hemos optado por filtrarlos y que solo quede un registro por postulante.
+
+Sobre los avisos vemos que tenemos tanto la información de si este se
+encuentra online como no, lo que nos da la pauta para saber si está en
+vigencia, por otro lado tenemos mucha información sobre el area de
+trabajo, el nivel de experiencia que requiere el puesto, también tenemos
+el nombre de la empresa (o grupo de empresas). todo sobre lo cual se
+pueden aplicar diversa cantidad de filtros o artilugios para limpiar los
+datos y poder generar gráficos más legibles y útiles.
+
+Tenemos datos tanto de las visitas como de las postulaciones en sí,
+ambos se pueden trabajar de manera similar puesto que el análisis que
+hacemos sobre uno puede hacerse de manera análoga sobre el otro, lo que
+nos lleva a tomar medidas similares a la hora de normalizar datos como
+ser la fecha de ocurrencia, como así también la información que
+obtenemos del detalle referente al aviso que se esta postulando o
+viendo.
+
+\hypertarget{section-1}{%
+\subsection{======================================================================}\label{section-1}}
+
+    \hypertarget{anuxe1lisis-sobre-los-postulantes-registrados}{%
+\section{2 - Análisis sobre los postulantes
+registrados:}\label{anuxe1lisis-sobre-los-postulantes-registrados}}
+
+En esta sección nos abocaremos a realizar diferentes tipos de gráficos
+relacionados pura y exclusivamente con los datos que tenemos sobre los
+postulantes, es decir que tomaremos la información provista por la
+fuente de datos referida a los postulantes y llevaremos a cabo
+diferentes análisis que nos pueden resultar de interés como de utilidad
+para una análisis próximo un poco más exaustivo. También es bueno
+considerar que muchas veces denominamos usuarios registrados a los
+postulantes, puesto que en definitiva representan lo mismo.
+
+\hypertarget{cuales-son-los-rangos-de-edad-que-muxe1s-comunes-entre-los-usuarios-registrados}{%
+\subsection{2.1 - ¿Cuales son los rangos de edad que más comunes entre
+los usuarios
+registrados?}\label{cuales-son-los-rangos-de-edad-que-muxe1s-comunes-entre-los-usuarios-registrados}}
+
+Vale aclarar en este punto que hemos tomado ciertas consideraciones a
+tener en cuenta, en primer instancia hemos decidido que las edades que
+consideramos lógicas son aquellas que están dentro de un rango mayor a
+los 17 años y menor a los 100 años, considerando que las edades fuera de
+ese rango son ilógicas y no aportan nada al informe, por otro lado
+tenemos el problema de que a priori hay registros repetidos para los
+postulantes por los diferentes niveles educativos, por eso eliminamos
+los repetidos, total nos basta con un registro por postulante.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} MOSTRAMOS LOS RANGOS DE EDAD SIN TENER POSTULANTES REPETIDOS.}
+         \PY{n}{rangos\PYZus{}edad} \PY{o}{=} \PY{n}{postulantes\PYZus{}unicos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rango\PYZus{}edad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{rangos\PYZus{}edad}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{rangos\PYZus{}edad}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{orient}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Usuarios por Rango de Edad}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de Usuarios}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rangos de Edad}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} Text(0,0.5,'Rangos de Edad')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{quuxe9-nivel-de-especializaciuxf3n-tienen-estos-postulantes}{%
+\subsection{2.2 - ¿Qué nivel de especialización tienen estos
+postulantes?}\label{quuxe9-nivel-de-especializaciuxf3n-tienen-estos-postulantes}}
+
+En este caso lo que nos interesa ver es el tipo de especialización que
+registran los diferentes usuarios, vale tener en cuenta que a diferencia
+del caso anterior en este caso si nos interesan los registros repetidos
+porque una persona puede tener varios tipos de especialización, como así
+también diferentes niveles educativos y el hecho de tener alguna
+especialización no quita la posibilidad o validez de tener otra. Por una
+cuestión de calidad gráfica hemos decidido unificar los terciarios y los
+técnicos (compartían un nombre conjunto) en solo terciarios para que
+fuese más legible el gráfico.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LOS DIFERENTES NIVELES EDUCATIVOS DE LOS USUARIOS.}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nombre}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{estado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{postulantes}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hls}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Niveles educativos de los usuarios}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Estudios}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de Usuarios}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} Text(0,0.5,'Cantidad de Usuarios')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{cual-es-la-proporciuxf3n-entre-los-guxe9neros-de-los-usuarios-registrados}{%
+\subsection{2.3 - ¿Cual es la proporción entre los géneros de los
+usuarios
+registrados?}\label{cual-es-la-proporciuxf3n-entre-los-guxe9neros-de-los-usuarios-registrados}}
+
+Lo que buscamos ver en este gráfico es la proporción que tenemos entre
+los diferentes postulantes, como así también ver el margen que tenemos
+de usuarios que no han especificado su género, esto nos permite a futuro
+ver por ejemplo que trabajos son más vistos o postulados por los hombres
+o por las mujeres, como así también ver si se mantiene un orden parejo
+en su proporcionalidad. Por otro lado podemos ver si es relevante la
+cantidad de usuarios que no han especificado su género, lo que nos
+podría cambiar el enfoque si fuese un valor proporcionalmente alto.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LA PROPORCIÓN DE GÉNERO ENTRE LOS POSTULANTES.}
+         \PY{n}{postulantes\PYZus{}masculinos} \PY{o}{=} \PY{n}{postulantes\PYZus{}unicos}\PY{p}{[}\PY{n}{postulantes\PYZus{}unicos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sexo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MASC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{postulantes\PYZus{}femeninos} \PY{o}{=} \PY{n}{postulantes\PYZus{}unicos}\PY{p}{[}\PY{n}{postulantes\PYZus{}unicos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sexo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FEM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{sizes} \PY{o}{=} \PY{p}{[}\PY{n}{postulantes\PYZus{}masculinos}\PY{o}{.}\PY{n}{sexo}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{postulantes\PYZus{}femeninos}\PY{o}{.}\PY{n}{sexo}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{n}{nombres} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Masculino}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Femenino}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribucion sobre el sexo de los postulantes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{sizes}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{nombres}\PY{p}{,} \PY{n}{autopct}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightgreen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{explode}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{hay-relevancia-por-parte-de-los-usuarios-que-no-han-registrado-su-guxe9nero}{%
+\subsection{2.4 - ¿Hay relevancia por parte de los usuarios que no han
+registrado su
+género?}\label{hay-relevancia-por-parte-de-los-usuarios-que-no-han-registrado-su-guxe9nero}}
+
+Buscamos corroborar la relevancia que puedan tener los usuarios que no
+han registrado su género, como así también ver si se encuentra algún
+factor clave en relación a esto, siempre y cuando su valor sea
+verdaderamente apreciable para dedicarle un análisis con mayor
+profundidad. Como podemos observar el valor es muy pequeño en relación
+al resto de los valores lo que no nos aporta nada de utilidad para un
+tratamiento especial sobre el tema.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LOS USUARIOS SIN GÉNERO.}
+         \PY{n}{postulantes\PYZus{}indefinidos} \PY{o}{=} \PY{n}{postulantes\PYZus{}unicos}\PY{p}{[}\PY{n}{postulantes\PYZus{}unicos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sexo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NO\PYZus{}DECLARA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{postulantes\PYZus{}indefinidos}\PY{o}{.}\PY{n}{sexo}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 444
+\end{Verbatim}
+            
+    \hypertarget{section}{%
+\subsection{======================================================================}\label{section}}
+
+    \hypertarget{anuxe1lisis-sobre-los-avisos-publicados}{%
+\section{3 - Análisis sobre los avisos
+publicados:}\label{anuxe1lisis-sobre-los-avisos-publicados}}
+
+    \hypertarget{quuxe9-proporciuxf3n-tenemos-entre-las-zonas-que-afectan-los-avisos}{%
+\subsection{3.1 - ¿Qué proporción tenemos entre las zonas que afectan
+los
+avisos?}\label{quuxe9-proporciuxf3n-tenemos-entre-las-zonas-que-afectan-los-avisos}}
+
+En un primer apartado buscaremos ver que relación hay entre las zonas
+afectadas, a pesar de no disponer de mayor detalle, al menos podemos ver
+que cuantos avisos están orientados al Gran Buenos Aires y cuales a la
+Ciudad Autónoma de Buenos Aires, lo que nos servirá como un primer
+acercamiento a la información.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LA PROPORCIÓN ENTRE LAS ZONAS.}
+         \PY{n}{avisos\PYZus{}caba} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}zona}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Capital Federal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{avisos\PYZus{}bsas} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nombre\PYZus{}zona}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gran Buenos Aires}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{sizes} \PY{o}{=} \PY{p}{[}\PY{n}{avisos\PYZus{}caba}\PY{o}{.}\PY{n}{nombre\PYZus{}zona}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{avisos\PYZus{}bsas}\PY{o}{.}\PY{n}{nombre\PYZus{}zona}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{n}{nombres} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CABA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GBA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribucion por las zonas referente a los avisos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{sizes}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{nombres}\PY{p}{,} \PY{n}{autopct}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightgreen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{explode}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{cuales-son-los-tipo-de-trabajo-muxe1s-requeridos-full-time-part-time}{%
+\subsection{3.2 - ¿Cuales son los tipo de trabajo más requeridos,
+full-time,
+part-time?}\label{cuales-son-los-tipo-de-trabajo-muxe1s-requeridos-full-time-part-time}}
+
+Listaremos los tipos de trabajo más buscados por las empresas y sus
+avisos, en primer instancia por lógica sabemos que hay dos que son los
+que más avisos tienen que son aquellos del tipo full-time y los del tipo
+part-time, pero también hay otros tipos y sería interesante ver que
+relación hay con el resto, son relevantes o no. Como podremos observar
+el trabajo full-time es por lejos el tipo de trabajo que predomina el
+mercado.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LAS ÁREAS CON MAYOR RELEVANCIA A LA HORA DE VISITAR LOS AVISOS.}
+         \PY{n}{avisos\PYZus{}tipo} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tipo\PYZus{}de\PYZus{}trabajo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=} \PY{n}{avisos\PYZus{}tipo}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{avisos\PYZus{}tipo}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TOP 5 tipos de trabajo relevantes.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de aviisos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tipo de trabajo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} Text(0,0.5,'Tipo de trabajo')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{quuxe9-proporciuxf3n-tenemos-entre-los-avisos-que-estuxe1n-online-y-los-offline}{%
+\subsection{3.3 - ¿Qué proporción tenemos entre los avisos que están
+online y los
+offline?}\label{quuxe9-proporciuxf3n-tenemos-entre-los-avisos-que-estuxe1n-online-y-los-offline}}
+
+Buscamos una relación/proporción entre los diferentes avisos, ya que a
+priori sabemos que hay dos estados posible, tanto el online como el
+offline, esto nos podría indicar que sea un valor parejo entre ambos o
+que alguna de estas cantidades sea mucho mayor que la otra lo que nos
+llevaría a tomar uno u otro enfoque a la hora de proseguir con el
+análisis.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LA PROPORCIÓN ENTRE EL ONLINE Y EL OFFLINE.}
+         \PY{n}{avisos\PYZus{}online} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{esta\PYZus{}online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{si}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{avisos\PYZus{}offline} \PY{o}{=} \PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{esta\PYZus{}online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{si}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{sizes} \PY{o}{=} \PY{p}{[}\PY{n}{avisos\PYZus{}online}\PY{o}{.}\PY{n}{esta\PYZus{}online}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{avisos\PYZus{}offline}\PY{o}{.}\PY{n}{esta\PYZus{}online}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{n}{nombres} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Offline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribucion sobre los avisos online/offline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{sizes}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{nombres}\PY{p}{,} \PY{n}{autopct}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightgreen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{explode}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{quuxe9-proporciuxf3n-tenemos-avisos-para-juniors-y-para-srssr}{%
+\subsection{3.4 - ¿Qué proporción tenemos avisos para Juniors y para
+Sr/Ssr?}\label{quuxe9-proporciuxf3n-tenemos-avisos-para-juniors-y-para-srssr}}
+
+La idea es ver que relación hay entre los juniors y los senior o
+semi-senior como para corroborar si se está buscando mucha más gente con
+mayor experiencia y capacitación o si se busca gente con menos
+experiencia y/o menor capacitación, esto lo podemos vincular o
+relacionar con lo que hemos estudiado para los usuarios registrados y
+sus rangos de edad y sus niveles educativos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LA PROPORCIÓN ENTRE JR y SSR/SR}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral\PYZus{}x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{n}{avisos\PYZus{}detalle\PYZus{}completo}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nivel\PYZus{}laboral\PYZus{}x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{orient}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{g}\PY{o}{.}\PY{n}{get\PYZus{}xticklabels}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NIvel laboral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de avisos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nivel laboral requerido en los avisos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} Text(0.5,1,'Nivel laboral requerido en los avisos')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{section}{%
+\subsection{======================================================================}\label{section}}
+
+    \hypertarget{anuxe1lisis-sobre-las-visitas}{%
+\section{4 - Análisis sobre las
+visitas:}\label{anuxe1lisis-sobre-las-visitas}}
+
+\hypertarget{quuxe9-duxedas-de-la-semana-se-ven-muxe1s-avisos}{%
+\subsection{4.1 - ¿Qué días de la semana se ven más
+avisos?}\label{quuxe9-duxedas-de-la-semana-se-ven-muxe1s-avisos}}
+
+La idea es tener ordenada la semana y ver cómo es que hay días más
+influyentes a la hora de visitar anuncios, esto es independiente a los
+postulaciones o incluso a los avisos, porque nos da la pauta de que días
+la gente ingresa a revisar con mayor frecuencia los diferentes avisos,
+sería interesante para las empresas el saber que día en la semana es el
+más propicio para iniciar una búsqueda laboral.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LOS DÍAS DE LA SEMANA DONDE SE VISITAN MÁS AVISOS.}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{vistas\PYZus{}avisos}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{n}{vistas\PYZus{}avisos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{orient}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{g}\PY{o}{.}\PY{n}{get\PYZus{}xticklabels}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dia de la semana}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de vistas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vistas por dia de la semana}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} Text(0.5,1,'Vistas por dia de la semana')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{cuales-son-las-areas-con-mayor-cantidad-de-visitas}{%
+\subsection{4.2 - ¿Cuales son las areas con mayor cantidad de
+visitas?}\label{cuales-son-las-areas-con-mayor-cantidad-de-visitas}}
+
+Buscamos ver cuales son las areas que mayor interés traen para los
+usuarios, aunque esto está vinculado directamente a la cantidad de
+avisos que haya para cada área, pero de todas maneras nos puede ser de
+utilidad para corroborar cuales son estas áreas y que relación tienen
+con los avisos y con las postulaciones realizadas. Como bien podremos
+ver las areas de Ventas y Administración son las que mayor relevancia
+tienen y las que más visitas reciben, siendo las que predominan en el
+mercado.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LAS ÁREAS CON MAYOR RELEVANCIA A LA HORA DE VISITAR LOS AVISOS.}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=} \PY{n}{top\PYZus{}visitados\PYZus{}area}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{top\PYZus{}visitados\PYZus{}area}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TOP 10 Areas con mas visitas en sus avisos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de visitas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Area}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} Text(0,0.5,'Area')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{cuales-vendruxedan-a-ser-las-ingenieruxedas-con-mayor-cantidad-de-visitas}{%
+\subsection{4.3 - ¿Cuales vendrían a ser las ingenierías con mayor
+cantidad de
+visitas?}\label{cuales-vendruxedan-a-ser-las-ingenieruxedas-con-mayor-cantidad-de-visitas}}
+
+Podemos tratar de hacer un paralelismo sobre las áreas en Ingeniería,
+reduciendo el ámbito de estudio solo a las que se relacionan con
+ingenieria o ramas afines, esto nos lleva a una conclusión bastante
+particular y es que la Ingeniería Industrial es la que más relevancia
+parece tener a la hora de visitar los avisos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LAS DIEZ INGENIERÍAS CON MAYOR RELEVANCIA A LA HORA DE VISITAR LOS AVISOS.}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=} \PY{n}{diez\PYZus{}ingenierias}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{diez\PYZus{}ingenierias}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TOP 10 Avisos visitados s/ rama Ingenieril}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de visitas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ingenieria en cuestion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} Text(0,0.5,'Ingenieria en cuestion')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{quuxe9-porcentaje-de-los-avisos-evaluadosvisitados-estuxe1-online}{%
+\subsection{4.4 - ¿Qué porcentaje de los avisos evaluados/visitados está
+online?}\label{quuxe9-porcentaje-de-los-avisos-evaluadosvisitados-estuxe1-online}}
+
+Lo que nos sirve ver en esta gráfica es ver que porcentaje de los avisos
+que se visitan estan online, entendemos que el estado online de un aviso
+hace referencia a si está activo a la hora en que las personas se han
+decidido postular.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LA PROPORCIÓN ENTRE AVISOS VISITADOS ONLINE Y OFFLINE.}
+         \PY{n}{vistas\PYZus{}online} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{esta\PYZus{}online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{si}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{vistas\PYZus{}offline} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{esta\PYZus{}online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{si}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{sizes} \PY{o}{=} \PY{p}{[}\PY{n}{vistas\PYZus{}online}\PY{o}{.}\PY{n}{esta\PYZus{}online}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{vistas\PYZus{}offline}\PY{o}{.}\PY{n}{esta\PYZus{}online}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{n}{nombres} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Offline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribucion sobre las visitas a los avisos online/offline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{sizes}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{nombres}\PY{p}{,} \PY{n}{autopct}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightgreen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{explode}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{cuales-son-las-empresas-que-reciben-mayor-cantidad-de-visitas-en-sus-avisos}{%
+\subsection{4.5 - ¿Cuales son las empresas que reciben mayor cantidad de
+visitas en sus
+avisos?}\label{cuales-son-las-empresas-que-reciben-mayor-cantidad-de-visitas-en-sus-avisos}}
+
+Sobre este punto hay que tener en cuenta que esto vinculará las empresas
+que tengan mayor cantidad de visitas pero también se relaciona con
+aquellas que tienen mayor cantidad de avisos, lo que llevará a tener por
+lógica una cantidad mayor de visitas, por otro lado se trató de unificar
+algunas empresas que se dividian en zonas pero que en definitiva eran la
+misma empresa. Se ha decidido tomar las diez primeras como muestra de
+relevancia.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} CONTAMOS LAS DIEZ EMPRESAS CON MAYOR CANTIDAD DE VISITAS EN SUS AVISOS.}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{diez\PYZus{}vistas\PYZus{}empresas}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{diez\PYZus{}vistas\PYZus{}empresas}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TOP 10 con mas visitas a sus avisos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de visitas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nombre de empresa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} Text(0,0.5,'Nombre de empresa')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{quuxe9-guxe9nero-es-el-que-muxe1s-utiliza-los-servicios-de-la-empresa}{%
+\subsection{4.6 - ¿Qué género es el que más utiliza los servicios de la
+empresa?}\label{quuxe9-guxe9nero-es-el-que-muxe1s-utiliza-los-servicios-de-la-empresa}}
+
+Buscamos ver que relación hay entre el género a la hora de visitar los
+avisos, y ver si estos en definitiva están online u offline, pudiendo
+así ver cúal es el comportamiento que se va desarrollando a entre las
+personas, habiendo casos donde quizás una persona a revizado mas de 300
+avisos en lo que puede parecer una actitud frenética o bien podría ser
+un bot, son cosas que nos permiten analizar este tipo de situaciones o
+al menos tener un dejo de duda sobre el mismo, por otro lado como es
+lógico los valores donde tenemos mayor cantidad son entre 0 a 100.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} AGRUPAMOS POR SEXO Y SEGÚN LA RELACIÓN DE SI EL AVISO ESTÁ ONLINE O NO Y COMO ES LA PROPORCIÓN DE VISITAS.}
+         \PY{n}{info\PYZus{}postulantes} \PY{o}{=} \PY{n}{vistas\PYZus{}avisos\PYZus{}completas}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sexo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{esta\PYZus{}online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{counts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{info\PYZus{}postulantes} \PY{o}{=} \PY{n}{info\PYZus{}postulantes}\PY{p}{[}\PY{n}{info\PYZus{}postulantes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{counts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{300}\PY{p}{]}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{factorplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sexo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{counts}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{esta\PYZus{}online}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{info\PYZus{}postulantes}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{strip}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{jitter}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{9}\PY{p}{,} \PY{n}{aspect}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{section}{%
+\subsection{======================================================================}\label{section}}
+
+    \hypertarget{anuxe1lisis-sobre-las-postulaciones}{%
+\section{5 - Análisis sobre las
+postulaciones:}\label{anuxe1lisis-sobre-las-postulaciones}}
+
+\hypertarget{quuxe9-duxedas-de-la-semana-se-postula-muxe1s-gente}{%
+\subsection{5.1 - ¿Qué días de la semana se postula más
+gente?}\label{quuxe9-duxedas-de-la-semana-se-postula-muxe1s-gente}}
+
+La idea es tener ordenada la semana y ver cómo es que hay días más
+influyentes a la hora de postularse en los anuncios, esto es
+independiente a las visitas o incluso a los avisos, porque nos da la
+pauta de que días la gente se termina postulando con mayor frecuencia
+los diferentes avisos, sería interesante para las empresas el saber que
+día en la semana es el más propicio para iniciar una búsqueda laboral.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LOS DÍAS DE LA SEMANA DONDE SE POSTULAN EN LOS AVISOS.}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{postulaciones}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{n}{postulaciones}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dia\PYZus{}semana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{orient}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{g}\PY{o}{.}\PY{n}{get\PYZus{}xticklabels}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dia de la semana}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de postulaciones}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Postulaciones por dia de la semana}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} Text(0.5,1,'Postulaciones por dia de la semana')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{cuales-son-las-areas-con-mayor-cantidad-de-postulaciones}{%
+\subsection{5.2 - ¿Cuales son las areas con mayor cantidad de
+postulaciones?}\label{cuales-son-las-areas-con-mayor-cantidad-de-postulaciones}}
+
+Buscamos ver cuales son las areas que mayor interés traen para los
+usuarios, aunque esto está vinculado directamente a la cantidad de
+avisos que haya para cada área, pero de todas maneras nos puede ser de
+utilidad para corroborar cuales son estas áreas y que relación tienen
+con los avisos y con las visitas realizadas. Como bien podremos ver las
+areas de Ventas y Administración son las que mayor relevancia tienen y
+las que más postulaciones reciben, siendo las que predominan en el
+mercado.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LAS ÁREAS CON MAYOR RELEVANCIA A LA HORA DE POSTULARSE EN LOS AVISOS.}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=} \PY{n}{top\PYZus{}postulaciones\PYZus{}area}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{top\PYZus{}postulaciones\PYZus{}area}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TOP 10 Areas con mas postulaciones}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de visitas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Area}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} Text(0,0.5,'Area')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{cuales-vendruxedan-a-ser-las-ingenieruxedas-con-mayor-cantidad-de-postulaciones}{%
+\subsection{5.3 - ¿Cuales vendrían a ser las ingenierías con mayor
+cantidad de
+postulaciones?}\label{cuales-vendruxedan-a-ser-las-ingenieruxedas-con-mayor-cantidad-de-postulaciones}}
+
+Podemos tratar de hacer un paralelismo sobre las áreas en Ingeniería,
+reduciendo el ámbito de estudio solo a las que se relacionan con
+ingenieria o ramas afines, esto nos lleva a una conclusión bastante
+particular y es que la Ingeniería Industrial es la que más relevancia
+parece tener a la hora de postularse en los avisos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LAS DIEZ INGENIERÍAS CON MAYOR RELEVANCIA A LA HORA DE POSTULARSE LOS AVISOS.}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{diez\PYZus{}ingenierias}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{diez\PYZus{}ingenierias}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TOP 10 Ingenierias con mas postulaciones}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de visitas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Area}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} Text(0,0.5,'Area')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{quuxe9-porcentaje-de-los-avisos-donde-se-ha-postulado-la-gente-estuxe1-online}{%
+\subsection{5.4 - ¿Qué porcentaje de los avisos donde se ha postulado la
+gente está
+online?}\label{quuxe9-porcentaje-de-los-avisos-donde-se-ha-postulado-la-gente-estuxe1-online}}
+
+Lo que nos sirve ver en esta gráfica es ver que porcentaje de los avisos
+en los que se postula la gente estan online, entendemos que el estado
+online de un aviso hace referencia a si está activo a la hora en que las
+personas se han decidido postular.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} GRAFICAMOS LA PROPORCIÓN ENTRE AVISOS EN LOS QUE SE HA POSTULADO LA GENTE ESTAN ONLINE Y OFFLINE.}
+         \PY{n}{postulaciones\PYZus{}online} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{esta\PYZus{}online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{si}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{postulaciones\PYZus{}offline} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{esta\PYZus{}online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{si}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{sizes} \PY{o}{=} \PY{p}{[}\PY{n}{postulaciones\PYZus{}online}\PY{o}{.}\PY{n}{esta\PYZus{}online}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{postulaciones\PYZus{}offline}\PY{o}{.}\PY{n}{esta\PYZus{}online}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{n}{nombres} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Offline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribucion sobre las visitas a los avisos online/offline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{sizes}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{nombres}\PY{p}{,} \PY{n}{autopct}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightgreen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{explode}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{cuales-son-las-empresas-con-mayor-cantidad-de-postulaciones-en-sus-avisos}{%
+\subsection{5.5 - ¿Cuales son las empresas con mayor cantidad de
+postulaciones en sus
+avisos?}\label{cuales-son-las-empresas-con-mayor-cantidad-de-postulaciones-en-sus-avisos}}
+
+Sobre este punto hay que tener en cuenta que esto vinculará las empresas
+que tengan mayor cantidad de postulaciones pero también se relaciona con
+aquellas que tienen mayor cantidad de avisos, lo que llevará a tener por
+lógica una cantidad mayor de postulaciones, por otro lado se trató de
+unificar algunas empresas que se dividian en zonas pero que en
+definitiva eran la misma empresa. Se ha decidido tomar las diez primeras
+como muestra de relevancia.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} CONTAMOS LAS DIEZ EMPRESAS CON MAYOR CANTIDAD DE POSTULACIONES EN SUS AVISOS.}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{diez\PYZus{}postulaciones\PYZus{}empresas}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{diez\PYZus{}postulaciones\PYZus{}empresas}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TOP 10 con mas postulaciones a sus avisos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad de visitas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{g}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nombre de empresa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} Text(0,0.5,'Nombre de empresa')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{quienes-se-postulan-muxe1s-a-los-avisos-hombres-o-mujeres}{%
+\subsection{5.6 - ¿Quienes se postulan más a los avisos? ¿Hombres o
+mujeres?}\label{quienes-se-postulan-muxe1s-a-los-avisos-hombres-o-mujeres}}
+
+Buscamos ver que relación hay entre el género a la hora de postularse en
+los avisos, y ver si estos en definitiva están online u offline,
+pudiendo así ver cúal es el comportamiento que se va desarrollando entre
+las personas, habiendo casos donde quizás una persona se postuló en más
+de 500 avisos en lo que puede parecer una actitud frenética aunque más
+bien podría parecer ser un bot, son cosas que nos permiten analizar este
+tipo de situaciones o al menos tener un dejo de duda sobre el mismo, por
+otro lado como es lógico los valores donde tenemos mayor cantidad son
+entre 0 a 100.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{postulantes\PYZus{}unicos}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} AGRUPAMOS POR SEXO Y SEGÚN LA RELACIÓN DE SI EL AVISO ESTÁ ONLINE O NO Y COMO ES LA PROPORCIÓN DE POSTULACIONES.}
+        \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{postulantes\PYZus{}unicos}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{info\PYZus{}postulantes} \PY{o}{=} \PY{n}{postulaciones\PYZus{}avisos\PYZus{}completos}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{idpostulante}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sexo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{esta\PYZus{}online}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cantidad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{info\PYZus{}postulantes} \PY{o}{=} \PY{n}{info\PYZus{}postulantes}\PY{p}{[}\PY{n}{info\PYZus{}postulantes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cantidad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{500}\PY{p}{]}
+        \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{factorplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sexo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cantidad}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{esta\PYZus{}online}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{info\PYZus{}postulantes}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{strip}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{jitter}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{aspect}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{section}{%
+\subsection{======================================================================}\label{section}}
+
+    \hypertarget{conclusiones-generales}{%
+\section{6 - Conclusiones generales:}\label{conclusiones-generales}}
+
+\hypertarget{conclusiones-sobre-lo-que-hemos-obtenido-del-informe.}{%
+\subsection{6.1 - Conclusiones sobre lo que hemos obtenido del
+informe.}\label{conclusiones-sobre-lo-que-hemos-obtenido-del-informe.}}
+
+En principio el set de datos que obtuvimos estaba bastante prolijo. A
+comparación con lo visto en los ejemplos de otros cuatrimestres, los
+duplicados se dieron en cuanto empezamos a mergear tablas para cruzar
+datos.
+
+En esta primera instancia no encontramos la forma de utilizar estos
+datos en pos del negocio de bienes raíces al que apunta la empresa, pero
+encontramos algunos datos interesantes sobre los rangos etáreos que
+maneja y el nivel de educación de los postulantes.
+
+Esto puede ser muy útil para campañas de marketing y para vender el
+servicio de consultoría en recursos humanos a las empresas que busquen
+personal, uno de los principales problemas de las empresas hoy en día es
+``Conocer a su cliente'' y en este análisis vimos los dos tipos de
+clientes que tiene Navent: los candidatos y las empresas que buscan
+recursos. Con estos datos sabemos qué tipo de candidatos tenemos y que
+empresas buscan.
+
+\hypertarget{repositorio-github.}{%
+\subsection{6.2 - Repositorio GitHub.}\label{repositorio-github.}}
+
+Nuestro repositorio de github es el siguiente:
+https://github.com/shizus/orga\_datos\_2018\_1c
+
+\hypertarget{section}{%
+\subsection{======================================================================}\label{section}}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
